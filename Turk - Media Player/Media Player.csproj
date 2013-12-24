@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -102,29 +103,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Resource Include="play.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="stop.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="max.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="media.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="media1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="media2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="media3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="pause.png" />
+    <Resource Include="Media\close.png" />
+    <Resource Include="Media\max.png" />
+    <Resource Include="Media\media2.png" />
+    <Resource Include="Media\minimize.png" />
+    <Resource Include="Media\open.png" />
+    <Resource Include="Media\pause.png" />
+    <Resource Include="Media\play.png" />
+    <Resource Include="Media\stop.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
