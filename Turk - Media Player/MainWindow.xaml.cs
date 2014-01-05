@@ -15,7 +15,7 @@ namespace Media_Player
     public partial class MainWindow
     {
         static bool _isMaximized;
-        static bool _isPaused; 
+        static bool _isPaused;
 
         public MainWindow()
         {
@@ -48,11 +48,34 @@ namespace Media_Player
             }
         }
 
+        private void btnForward_Click(object sender, RoutedEventArgs e)
+        {
+            var forward = TimeSpan.FromSeconds(MediaElement.Position.TotalSeconds + 10);
+            MediaElement.Position = forward;
+
+            LblInfo.Visibility = Visibility.Visible;
+            LblInfo.Content = "[ Forward: 10 Seconds ]";
+            ShowHideTimer();
+        }
+
+        private void btnBackward_Click(object sender, RoutedEventArgs e)
+        {
+            var reverse = TimeSpan.FromSeconds(MediaElement.Position.TotalSeconds - 10);
+            MediaElement.Position = reverse;
+
+            LblInfo.Visibility = Visibility.Visible;
+            LblInfo.Content = "[ Background: 10 Seconds ]";
+            ShowHideTimer();
+        }
+
         private void ChangeImage(string status)
         {
             var img = new BitmapImage();
             img.BeginInit();
-            img.UriSource = new Uri(@"C:\Users\Turk\Desktop\WPF Project\Media Player\Turk - Media Player\images\" + status + ".png");
+            img.UriSource = new Uri(Environment.
+                                    CurrentDirectory.
+                                    Replace("bin\\Debug", "Media\\") +
+                                    status + ".png");
             img.EndInit();
             PlayPauseImg.Source = img;
         }
@@ -70,7 +93,12 @@ namespace Media_Player
 
         private void btnOpen_Click(object sender, RoutedEventArgs e)
         {
-            var ofd = new OpenFileDialog { AddExtension = true, DefaultExt = "*.*", Filter = Properties.Resources.Media_Files_Format };
+            var ofd = new OpenFileDialog
+            {
+                AddExtension = true,
+                DefaultExt = "*.*",
+                Filter = Properties.Resources.Media_Files_Format
+            };
             ofd.ShowDialog();
 
             try
@@ -90,6 +118,9 @@ namespace Media_Player
             LogoStartWindow.Visibility = Visibility.Hidden;
             LblMediaPlayer.Visibility = Visibility.Hidden;
             ChangeImage("Pause");
+
+            WWindow.Width = MediaElement.NaturalVideoWidth;
+            WWindow.Height = MediaElement.NaturalVideoHeight;
         }
 
         void mediaElement_MediaOpened(object sender, RoutedEventArgs e)
@@ -106,7 +137,9 @@ namespace Media_Player
         private void timer_Tick(object sender, EventArgs e)
         {
             TsSlider.Value = MediaElement.Position.TotalSeconds;
-            LblTimeElapsed.Content = MediaElement.Position.Hours + ":" + MediaElement.Position.Minutes + ":" + MediaElement.Position.Seconds;
+            LblTimeElapsed.Content = MediaElement.Position.Hours + ":" +
+                                     MediaElement.Position.Minutes + ":" +
+                                     MediaElement.Position.Seconds;
         }
 
         private void tsSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -122,7 +155,7 @@ namespace Media_Player
             try
             {
                 LblInfo.Visibility = Visibility.Visible;
-                LblInfo.Content = "[ Volume: %" + Convert.ToString(Math.Round(VolSlider.Value * 100, 0)) + " ]"; 
+                LblInfo.Content = "[ Volume: %" + Convert.ToString(Math.Round(VolSlider.Value * 100, 0)) + " ]";
                 ShowHideTimer();
             }
             catch (Exception)
@@ -218,7 +251,7 @@ namespace Media_Player
 
         private void ShowHideTimer()
         {
-            var timer = new DispatcherTimer {Interval = TimeSpan.FromSeconds(3d)};
+            var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3d) };
             timer.Tick += TimerTick;
             timer.Start();
         }
@@ -281,6 +314,8 @@ namespace Media_Player
             BtnOpen.Visibility = Visibility.Visible;
             BtnPlay.Visibility = Visibility.Visible;
             BtnStop.Visibility = Visibility.Visible;
+            BtnBackward.Visibility = Visibility.Visible;
+            BtnForward.Visibility = Visibility.Visible;
             VolSlider.Visibility = Visibility.Visible;
             LblVol.Visibility = Visibility.Visible;
             LblTimeElapsed.Visibility = Visibility.Visible;
@@ -292,6 +327,8 @@ namespace Media_Player
             BtnOpen.Visibility = Visibility.Hidden;
             BtnPlay.Visibility = Visibility.Hidden;
             BtnStop.Visibility = Visibility.Hidden;
+            BtnBackward.Visibility = Visibility.Hidden;
+            BtnForward.Visibility = Visibility.Hidden;
             VolSlider.Visibility = Visibility.Hidden;
             LblVol.Visibility = Visibility.Hidden;
             LblTimeElapsed.Visibility = Visibility.Hidden;
@@ -316,6 +353,7 @@ namespace Media_Player
         private void resize_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             TsSlider.Width = WWindow.Width - 310;
+            BkgStartWindow.Height = WWindow.Height - 100;
         }
     }
 }

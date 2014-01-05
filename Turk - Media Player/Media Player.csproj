@@ -103,7 +103,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Media\backward.png" />
+    <Resource Include="Media\forward.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Media\close.png" />
     <Resource Include="Media\max.png" />
