@@ -285,53 +285,47 @@ namespace Media_Player
 
         private void TopBarTools_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            BtnMaximizeWindow.Visibility = Visibility.Visible;
-            BtnMinimizeWindow.Visibility = Visibility.Visible;
-            BtnClose.Visibility = Visibility.Visible;
-            LblFileName.Visibility = Visibility.Visible;
-            //            bkgTopBar.Opacity = 100;
-            //Rectangle rc = (Rectangle)sender;
-            var animation = new DoubleAnimation(1, TimeSpan.FromMilliseconds(250));
-            BkgTopBar.BeginAnimation(OpacityProperty, animation);
-
+            ChangeTopBarVisibility(Visibility.Visible, 1);
         }
 
         private void TopBarTools_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            BtnMaximizeWindow.Visibility = Visibility.Hidden;
-            BtnMinimizeWindow.Visibility = Visibility.Hidden;
-            BtnClose.Visibility = Visibility.Hidden;
-            LblFileName.Visibility = Visibility.Hidden;
-            //          bkgTopBar.Opacity = 0;
-            //Rectangle rc = (Rectangle)sender;
-            var animation = new DoubleAnimation(0, TimeSpan.FromMilliseconds(250));
+            ChangeTopBarVisibility(Visibility.Hidden, 0);
+        }
+
+        private void ChangeTopBarVisibility(Visibility status, int destination)
+        {
+            BtnMaximizeWindow.Visibility = status;
+            BtnMinimizeWindow.Visibility = status;
+            BtnClose.Visibility = status;
+            LblFileName.Visibility = status;
+            var animation = new DoubleAnimation(destination, TimeSpan.FromMilliseconds(250));
             BkgTopBar.BeginAnimation(OpacityProperty, animation);
         }
 
         private void BottomBar_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            TsSlider.Visibility = Visibility.Visible;
-            BtnOpen.Visibility = Visibility.Visible;
-            BtnPlay.Visibility = Visibility.Visible;
-            BtnStop.Visibility = Visibility.Visible;
-            BtnBackward.Visibility = Visibility.Visible;
-            BtnForward.Visibility = Visibility.Visible;
-            VolSlider.Visibility = Visibility.Visible;
-            LblVol.Visibility = Visibility.Visible;
-            LblTimeElapsed.Visibility = Visibility.Visible;
+            ChangeBotBarVisibility(Visibility.Visible, 1);
         }
 
         private void BottomBar_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            TsSlider.Visibility = Visibility.Hidden;
-            BtnOpen.Visibility = Visibility.Hidden;
-            BtnPlay.Visibility = Visibility.Hidden;
-            BtnStop.Visibility = Visibility.Hidden;
-            BtnBackward.Visibility = Visibility.Hidden;
-            BtnForward.Visibility = Visibility.Hidden;
-            VolSlider.Visibility = Visibility.Hidden;
-            LblVol.Visibility = Visibility.Hidden;
-            LblTimeElapsed.Visibility = Visibility.Hidden;
+            ChangeBotBarVisibility(Visibility.Hidden, 0);
+        }
+
+        private void ChangeBotBarVisibility(Visibility status, int destination)
+        {
+            TsSlider.Visibility = status;
+            BtnOpen.Visibility = status;
+            BtnPlay.Visibility = status;
+            BtnStop.Visibility = status;
+            BtnBackward.Visibility = status;
+            BtnForward.Visibility = status;
+            VolSlider.Visibility = status;
+            LblVol.Visibility = status;
+            LblTimeElapsed.Visibility = status;
+            var animation = new DoubleAnimation(destination, TimeSpan.FromMilliseconds(250));
+            BkgBotBar.BeginAnimation(OpacityProperty, animation);
         }
 
         private void btnCloseWindow_Click(object sender, RoutedEventArgs e)
